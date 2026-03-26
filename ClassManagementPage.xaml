@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Views.ClassManagementPage"
+             Title="ClassManagementPage">
+    <Grid RowDefinitions="Auto,*,Auto" BackgroundColor="#F5DEB3">
+        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="10" BackgroundColor="#FF6B35">
+            <Label Text="> ZARZĄDZANIE KLASAMI" StyleClass="header-label"/>
+            <VerticalStackLayout Spacing="10">
+                <Label Text="[NOWA KLASA]:" TextColor="#FFFFFF" FontAttributes="Bold" FontSize="12"/>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Entry x:Name="NewClassNameEntry" Placeholder="Np. 1A, 2B, 3C..." StyleClass="entry-style"/>
+                    <Button Text="[DODAJ]" Clicked="OnCreateClassClicked" StyleClass="primary-button" Grid.Column="1"/>
+                </Grid>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="ClassesCollectionView" Grid.Row="1" BackgroundColor="#F5DEB3">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame StyleClass="primary-frame">
+                        <VerticalStackLayout Spacing="10">
+                            <Grid ColumnDefinitions="*,Auto,Auto">
+                                <Label Grid.Column="0" Text="{Binding ClassName, StringFormat='[KLASA: {0}]'}" StyleClass="section-heading" VerticalOptions="Center"/>
+                                <Button Grid.Column="1" Text="[EDIT]" Clicked="OnEditClassClicked" StyleClass="small-button" CommandParameter="{Binding ClassName}"/>
+                                <Button Grid.Column="2" Text="[DEL]" Clicked="OnDeleteClassClicked" StyleClass="small-button danger" CommandParameter="{Binding ClassName}"/>
+                            </Grid>
+                            <Label Text="{Binding Students.Count, StringFormat='> Uczniów: {0}'}" StyleClass="normal-label"/>
+                            <Label Text="{Binding LuckyNumber, StringFormat='> Szczęśliwy numerek: {0}'}" TextColor="#FF6B35" FontAttributes="Bold" FontSize="12"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
