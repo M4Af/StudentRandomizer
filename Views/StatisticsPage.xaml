@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Views.StatisticsPage"
+             Title="StatisticsPage">
+    <Grid RowDefinitions="Auto,*" BackgroundColor="#F5DEB3">
+        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="10" BackgroundColor="#004E89">
+            <Label Text="> STATYSTYKI LOSOWAŃ" StyleClass="header-label"/>
+            <Picker x:Name="ClassPickerStats" Title="[WYBIERZ KLASĘ]" TitleColor="#FFFFFF" TextColor="#FFFFFF" BackgroundColor="#1E90FF" SelectedIndexChanged="OnClassSelectedStats"/>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="StatisticsCollectionView" Grid.Row="1" BackgroundColor="#F5DEB3">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame StyleClass="primary-frame">
+                        <VerticalStackLayout Spacing="5">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="{Binding StudentName}" StyleClass="section-heading"/>
+                                <Label Grid.Column="1" Text="{Binding TimesAsked, StringFormat='[{0}]'}" TextColor="#FF6B35" FontAttributes="Bold" FontSize="14"/>
+                            </Grid>
+                            <Label Text="{Binding LuckyCount, StringFormat='> Szczęśliwe numerki: {0}'}" TextColor="#DC143C" FontAttributes="Bold" FontSize="12"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
